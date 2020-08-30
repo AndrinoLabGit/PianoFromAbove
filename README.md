@@ -54,3 +54,7 @@ Once that's done, there should be a Release\PFA-1.1.0-x86_64.exe that you can ru
 There's an optional .nsi script that you can run if you want to build an installer.
 
 The code probably isn't the best, and it probably goes against all sorts of best practices but it is fairly snappy. I'm not very good at writing UI or UX, but I am fairly good at writing datastructures and writing minimal and fast code. Good luck reading it! 
+
+## This Fork
+I am learning how to program.
+ - A.L.

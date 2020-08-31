@@ -57,8 +57,9 @@ The code probably isn't the best, and it probably goes against all sorts of best
 
 ## This Fork
 8/30/20
+
 Goal:
-I am learning how to program.  My first goal is to complie PianoFromAbove using VS Community 2019.  This might not work.  My second goal is to allow note playback on a Nektar Midi Controller.
+I am learning how to program.  I have zero/minimal C++ experience.  My first goal is to complie PianoFromAbove using VS Community 2019.  This might not work.  My second goal is to allow note playback on a Nektar Midi Controller.
 
 Steps During Testing:
 * Installed VS 2019 Community
@@ -71,6 +72,6 @@ Steps During Testing:
 * Reinstall boost and protobuf (:x64-windows)
 
 Current Errors
-*Tons
+* Tons
 
  - A.L.

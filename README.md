@@ -91,4 +91,8 @@ Steps During Testing
 * Error with complied libraries.  Need to recompile libprotobuf.lib/libprotobuf-lite.lib/libprotoc.lib libraries - C/C++ --> Code Generation --> Runtime Library, select the Multi-threaded (/MT)  (https://stackoverflow.com/questions/28887001/lnk2038-mismatch-detected-for-runtimelibrary-value-mt-staticrelease-doesn)
 * The program loads!
 
+8/31/20
+
+Tweeks to learn the program
+* Reduced opening sound to 3 seconds
 

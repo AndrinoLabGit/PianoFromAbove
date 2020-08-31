@@ -96,3 +96,12 @@ Steps During Testing
 Tweeks to learn the program
 * Reduced opening sound to 3 seconds
 
+Notes to try to figure out how to get playback on Nektar key press
+* Gamestate.cpp has text for button presses
+```
+const wchar_t *GameScore::MissedText = L"Missed!";
+const wchar_t *GameScore::IncorrectText = L"Wrong!";
+const wchar_t *GameScore::OkText = L"OK!";
+const wchar_t *GameScore::GoodText = L"Good!";
+const wchar_t *GameScore::GreatText = L"Great!";
+```

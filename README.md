@@ -58,20 +58,27 @@ The code probably isn't the best, and it probably goes against all sorts of best
 ## This Fork
 8/30/20
 
-Goal:
-I am learning how to program.  I have zero/minimal C++ experience.  My first goal is to complie PianoFromAbove using VS Community 2019.  This might not work.  My second goal is to allow note playback on a Nektar Midi Controller.
+Goal
+* I am learning how to program.  I have zero/minimal C++ experience.  My first goal is to complie PianoFromAbove using VS Community 2019.  This might not work.  My second goal is to allow note playback on a Nektar Midi Controller.
 
-Steps During Testing:
+Steps During Testing
 * Installed VS 2019 Community
 * Installed GIT for VS
 * Forked repository
-* Installed vcpkg
+* Installed vcpkg (https://github.com/microsoft/vcpkg)
 * Installed boost
 * Installed protobuf
 * Realized vcpkg defaults to x86
-* Reinstall boost and protobuf (:x64-windows)
+* Reinstall boost (:x64-windows) (18 min install time)
+* Reinstall protobuf (:x64-windows)
+* Specific version issue for vcbkg (https://github.com/microsoft/vcpkg/issues/1681)
+* Protoc.exe located (C:\src\vcpkg\installed\x64-windows\tools\protobuf)
+* I think I need to generate a new MetaData.pb.h for the latest protobuf version
+* Protobuf tutorial starts with a *.proto file (https://developers.google.com/protocol-buffers/docs/cpptutorial)
+* Protoc.exe found in C:\src\vcpkg\installed\x64-windows\tools\protobuf
+* Running tutorial code successful using command ./protoc -I=. --cpp_out=. ./test.proto
+
 
 Current Errors
 * Tons
 
- - A.L.

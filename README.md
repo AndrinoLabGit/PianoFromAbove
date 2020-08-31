@@ -56,5 +56,21 @@ There's an optional .nsi script that you can run if you want to build an install
 The code probably isn't the best, and it probably goes against all sorts of best practices but it is fairly snappy. I'm not very good at writing UI or UX, but I am fairly good at writing datastructures and writing minimal and fast code. Good luck reading it! 
 
 ## This Fork
-I am learning how to program.  I am figuring out to get program to work with a Nektar Midi Controller.
+8/30/20
+Goal:
+I am learning how to program.  My first goal is to complie PianoFromAbove using VS Community 2019.  This might not work.  My second goal is to allow note playback on a Nektar Midi Controller.
+
+Steps During Testing:
+* Installed VS 2019 Community
+* Installed GIT for VS
+* Forked repository
+* Installed vcpkg
+* Installed boost
+* Installed protobuf
+* Realized vcpkg defaults to x86
+* Reinstall boost and protobuf (:x64-windows)
+
+Current Errors
+*Tons
+
  - A.L.

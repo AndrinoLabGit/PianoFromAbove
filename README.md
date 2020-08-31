@@ -63,30 +63,32 @@ Goal
 
 Steps During Testing
 * Installed VS 2019 Community
-* Installed GIT for VS
+* Installed GIT for VS (https://visualstudio.github.com/)
 * Forked repository
 * Installed vcpkg (https://github.com/microsoft/vcpkg)
-* Installed boost
-* Installed protobuf
+* Installed boost (1.73)
+* Installed protobuf (3.13.0)
 * Realized vcpkg defaults to x86
 * Reinstall boost (:x64-windows) (18 min install time)
 * Reinstall protobuf (:x64-windows)
-* Specific version issue for vcbkg (https://github.com/microsoft/vcpkg/issues/1681)
+* Cannot install older version of libraries for vcbkg (https://github.com/microsoft/vcpkg/issues/1681)
 * Protoc.exe located (C:\src\vcpkg\installed\x64-windows\tools\protobuf)
-* I think I need to generate a new MetaData.pb.h for the latest protobuf version
+* I think I need to generate a new MetaData.pb.h for the latest protobuf 3.13 version
 * Protobuf tutorial starts with a *.proto file (https://developers.google.com/protocol-buffers/docs/cpptutorial)
 * Protoc.exe found in C:\src\vcpkg\installed\x64-windows\tools\protobuf
 * Running tutorial code successful using command ./protoc -I=. --cpp_out=. ./test.proto
 * Trying protobuf 2.5 for now before attempting to find *.proto file (https://github.com/protocolbuffers/protobuf/releases?after=v2.6.1)
 * Found protobuf 2.5 on NuGet
-* Uninstalled protobuf installed on vcpkg (.\vcpkg remove protobuf:x64-windows)
+* Uninstalled protobuf 3.13.0 installed on vcpkg (.\vcpkg remove protobuf:x64-windows)
 * Looks like only DirectX errors are left
 * Install DirectX SDK.  Fix for S21023 error (https://jaewon.hwang.info/jaewon/2015/05/08/s1023-error-when-you-install-the-directx-sdk-june-2010/)
 * Fatal Error RC1015 (https://community.developers.refinitiv.com/questions/8225/fatal-error-rc1015-cannot-open-include-file-afxres.html)
 * Linker Error (https://stackoverflow.com/questions/23471337/lnk1117-syntax-error-in-option-version1-0-0)
-* Going back to building 2.5
-* Error on VS 2019 (https://stackoverflow.com/questions/30430789/c-hash-deprecation-warning)
-* Recomplie libraries - C/C++ --> Code Generation --> Runtime Library, select the Multi-threaded (/MT)  (https://stackoverflow.com/questions/28887001/lnk2038-mismatch-detected-for-runtimelibrary-value-mt-staticrelease-doesn)
+* Still missing lib files even after getting nuget protobuf 2.5
+* Going back to building protobuf 2.5 from link (https://github.com/protocolbuffers/protobuf/releases?after=v2.6.1)
+* Error on VS 2019 when building libraries.  Adding _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS=1; fixes error (https://stackoverflow.com/questions/30430789/c-hash-deprecation-warning)
+* Add files to C:\src\ProtobufLibs (libprotobuf.lib/libprotobuf-lite.lib/libprotoc.lib) and referenced in Properties/VC Directory/Library Directories
+* Error with complied libraries.  Need to recompile libprotobuf.lib/libprotobuf-lite.lib/libprotoc.lib libraries - C/C++ --> Code Generation --> Runtime Library, select the Multi-threaded (/MT)  (https://stackoverflow.com/questions/28887001/lnk2038-mismatch-detected-for-runtimelibrary-value-mt-staticrelease-doesn)
 * The program loads!
 
 

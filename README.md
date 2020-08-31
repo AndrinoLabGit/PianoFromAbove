@@ -105,3 +105,25 @@ const wchar_t *GameScore::OkText = L"OK!";
 const wchar_t *GameScore::GoodText = L"Good!";
 const wchar_t *GameScore::GreatText = L"Great!";
 ```
+* Main logic code seems to be in Gamestate.cpp
+```
+GameState::GameError MainScreen::Logic( void )
+```
+
+* Possible sound logic
+```
+        // Advance start position updating initial state as we pass stale events
+        // Also PLAYS THE MUSIC
+        while ( m_iStartPos < iEventCount && m_vEvents[m_iStartPos]->GetAbsMicroSec() <= m_llStartTime )
+        {
+            MIDIChannelEvent *pEvent = m_vEvents[m_iStartPos];
+            if ( pEvent->GetChannelEventType() != MIDIChannelEvent::NoteOn )
+                m_OutDevice.PlayEvent( pEvent->GetEventCode(), pEvent->GetParam1(), pEvent->GetParam2() );
+            else if ( !m_bMute && !m_vTrackSettings[pEvent->GetTrack()].aChannels[pEvent->GetChannel()].bMuted &&
+                      ( m_eGameMode != Learn || m_iLearnOrdinal >= 0 ) )
+                m_OutDevice.PlayEvent( pEvent->GetEventCode(), pEvent->GetParam1(),
+                                       static_cast< int >( pEvent->GetParam2() * dVolumeCorrect + 0.5 ) );
+            UpdateState( m_iStartPos );
+            m_iStartPos++;
+        }
+```

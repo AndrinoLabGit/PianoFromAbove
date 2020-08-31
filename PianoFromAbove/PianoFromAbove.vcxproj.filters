@@ -141,5 +141,6 @@
     <None Include="Images\Lock.bmp">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

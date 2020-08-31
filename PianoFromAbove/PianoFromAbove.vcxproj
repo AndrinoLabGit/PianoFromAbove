@@ -89,7 +89,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(DXSDK_DIR)Include;C:\Users\Pantano\Dev\boost_1_55_0;C:\Users\Pantano\Dev\protobuf-2.5.0\vsprojects\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(DXSDK_DIR)Lib\x64;C:\Users\Pantano\Dev\protobuf-2.5.0\vsprojects\Release\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(DXSDK_DIR)Lib\x64;C:\Users\Pantano\Dev\protobuf-2.5.0\vsprojects\Release\x64;C:\src\ProtobufLibs;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)\$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\$(Platform)\</IntDir>
     <TargetName>PFA-1.1.0-x86_64</TargetName>
@@ -167,8 +167,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalManifestDependencies>"type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'";%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
       <AdditionalDependencies>d3d9.lib;d3dx9.lib;Comctl32.lib;WinMM.lib;UxTheme.lib;Advapi32.lib;Msimg32.lib;libprotobuf-lite.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <Version>1.1.0</Version>
+      <Version>
+      </Version>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Config.h" />
@@ -212,8 +216,16 @@
     <None Include="Images\PFA Icon.ico" />
     <None Include="Images\mediaiconssmall.bmp" />
     <None Include="images\Welcome.ico" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\protobuf.2.5.0.0\build\native\protobuf.targets" Condition="Exists('..\packages\protobuf.2.5.0.0\build\native\protobuf.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\protobuf.2.5.0.0\build\native\protobuf.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\protobuf.2.5.0.0\build\native\protobuf.targets'))" />
+  </Target>
 </Project>

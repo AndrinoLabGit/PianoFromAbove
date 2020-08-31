@@ -77,6 +77,19 @@ Steps During Testing
 * Protobuf tutorial starts with a *.proto file (https://developers.google.com/protocol-buffers/docs/cpptutorial)
 * Protoc.exe found in C:\src\vcpkg\installed\x64-windows\tools\protobuf
 * Running tutorial code successful using command ./protoc -I=. --cpp_out=. ./test.proto
+* Trying protobuf 2.5 for now before attempting to find *.proto file (https://github.com/protocolbuffers/protobuf/releases?after=v2.6.1)
+* Found protobuf 2.5 on NuGet
+* Uninstalled protobuf installed on vcpkg (.\vcpkg remove protobuf:x64-windows)
+* Looks like only DirectX errors are left
+* Install DirectX SDK.  Fix for S21023 error (https://jaewon.hwang.info/jaewon/2015/05/08/s1023-error-when-you-install-the-directx-sdk-june-2010/)
+* Fatal Error RC1015 (https://community.developers.refinitiv.com/questions/8225/fatal-error-rc1015-cannot-open-include-file-afxres.html)
+* Linker Error (https://stackoverflow.com/questions/23471337/lnk1117-syntax-error-in-option-version1-0-0)
+* Going back to building 2.5
+* Error on VS 2019 (https://stackoverflow.com/questions/30430789/c-hash-deprecation-warning)
+* Recomplie libraries - C/C++ --> Code Generation --> Runtime Library, select the Multi-threaded (/MT)  (https://stackoverflow.com/questions/28887001/lnk2038-mismatch-detected-for-runtimelibrary-value-mt-staticrelease-doesn)
+* The program loads!
+
+
 
 
 Current Errors

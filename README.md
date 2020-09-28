@@ -214,4 +214,13 @@ void MainScreen::ProcessInput()
     unsigned char cStatus, cParam1, cParam2;
 ```
 * Can I juse use the PlayEvent here to play a sound??
-
+* Somewhat working with current complied code.  Added the following code to the start of the input:
+```
+m_OutDevice.PlayEventAcrossChannels(cStatus, cParam1, static_cast<int>(cParam2 * dVolumeCorrect + 0.5));
+```
+* There was some strange cymbal sounds with the default Windows Wavetable Synth.
+* It could be related to this: https://music.stackexchange.com/questions/7227/what-keys-are-associated-to-what-drums-when-connecting-keyboard-to-roland-electr
+* I was able to change the soundfont using OmniMIDI
+* https://officialblackmidi.fandom.com/wiki/OmniMIDI and https://github.com/KeppySoftware/OmniMIDI/releases
+* The free soundfonts used were from this video
+* Which is the best FREE piano soundfont? - https://www.youtube.com/watch?v=Yosxt34Foss&feature=emb_title

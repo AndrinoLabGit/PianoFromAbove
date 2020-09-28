@@ -1382,9 +1382,9 @@ void MainScreen::ProcessInput()
         // is cStatus the event code?
         // cStatus &= 0xF0;
         // Working Code
-        // m_OutDevice.PlayEventAcrossChannels(cStatus, cParam1, static_cast<int>(cParam2 * dVolumeCorrect + 0.5));
+        m_OutDevice.PlayEventAcrossChannels(cStatus, cParam1, static_cast<int>(cParam2 * dVolumeCorrect + 0.5));
         // Testing out Alternative
-        m_OutDevice.PlayEventAcrossChannels(cStatus, cParam1, cParam2);
+        // m_OutDevice.PlayEventAcrossChannels(cStatus, cParam1, cParam2);
         //////////////////////////////////////////////////////////////////
         MIDIChannelEvent::ChannelEventType eEventType = static_cast< MIDIChannelEvent::ChannelEventType >( cStatus >> 4 );
         if ( eEventType == MIDIChannelEvent::NoteOff || ( eEventType == MIDIChannelEvent::NoteOn && cParam2 == 0 ) )

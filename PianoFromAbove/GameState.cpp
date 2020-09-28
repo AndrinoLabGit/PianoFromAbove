@@ -295,12 +295,13 @@ GameState::GameError SplashScreen::Logic()
     while ( m_iStartPos < iEventCount && m_vEvents[m_iStartPos]->GetAbsMicroSec() <= m_llStartTime )
     {
         MIDIChannelEvent *pEvent = m_vEvents[m_iStartPos];
-        if ( pEvent->GetChannelEventType() != MIDIChannelEvent::NoteOn )
-            m_OutDevice.PlayEvent( pEvent->GetEventCode(), pEvent->GetParam1(), pEvent->GetParam2() );
-        else if ( !m_bMute && !m_vTrackSettings[pEvent->GetTrack()].aChannels[pEvent->GetChannel()].bMuted )
-            m_OutDevice.PlayEvent( pEvent->GetEventCode(), pEvent->GetParam1(),
-                                    static_cast< int >( pEvent->GetParam2() * dVolumeCorrect + 0.5 ) );
-        UpdateState( m_iStartPos );
+        if (pEvent->GetChannelEventType() != MIDIChannelEvent::NoteOn) {
+            m_OutDevice.PlayEvent(pEvent->GetEventCode(), pEvent->GetParam1(), pEvent->GetParam2());
+        }
+        else if (!m_bMute && !m_vTrackSettings[pEvent->GetTrack()].aChannels[pEvent->GetChannel()].bMuted) {
+            m_OutDevice.PlayEvent(pEvent->GetEventCode(), pEvent->GetParam1(), static_cast<int>(pEvent->GetParam2() * dVolumeCorrect + 0.5));
+        }
+         UpdateState( m_iStartPos );
         m_iStartPos++;
     }
 

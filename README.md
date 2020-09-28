@@ -110,7 +110,7 @@ const wchar_t *GameScore::GreatText = L"Great!";
 GameState::GameError MainScreen::Logic( void )
 ```
 
-* Possible sound logic
+* Possible Sound Logic
 ```
         // Advance start position updating initial state as we pass stale events
         // Also PLAYS THE MUSIC
@@ -126,4 +126,46 @@ GameState::GameError MainScreen::Logic( void )
             UpdateState( m_iStartPos );
             m_iStartPos++;
         }
+```
+
+* Possible Key Render on Key Press Logic (White Keys)
+```
+                bool bBadLearn = ( m_eGameMode == Learn && m_iLearnOrdinal >= 0 && ( iTrack != m_iLearnTrack || iChannel != m_iLearnChannel ) );
+                ChannelSettings &csKBWhite = ( m_pInputState[i] == -2 || bBadLearn ||
+                                               pEvent->GetInputQuality() == MIDIChannelEvent::Missed ? m_csKBBadNote :
+                                               m_vTrackSettings[iTrack].aChannels[iChannel] );
+                m_pRenderer->DrawRect( fCurX + fKeyGap1 , fCurY, m_fWhiteCX - fKeyGap, fTopCY + fNearCY - 2.0f,
+                    csKBWhite.iDarkRGB | iAlpha, csKBWhite.iDarkRGB | iAlpha, csKBWhite.iPrimaryRGB | iAlpha, csKBWhite.iPrimaryRGB | iAlpha );
+                m_pRenderer->DrawRect( fCurX + fKeyGap1 , fCurY + fTopCY + fNearCY - 2.0f, m_fWhiteCX - fKeyGap, 2.0f, csKBWhite.iDarkRGB | iAlpha );
+```
+
+* Possible Key Render on Key Press Logic (Sharps)
+```
+const bool bBadLearn = ( m_eGameMode == Learn && m_iLearnOrdinal >= 0 && ( iTrack != m_iLearnTrack || iChannel != m_iLearnChannel ) );
+                const ChannelSettings &csKBSharp = ( m_pInputState[i] == -2 || bBadLearn ||
+                                                     pEvent->GetInputQuality() == MIDIChannelEvent::Missed ? m_csKBBadNote :
+                                                     m_vTrackSettings[iTrack].aChannels[iChannel] );
+                m_pRenderer->DrawSkew( fSharpTopX1, fCurY + fSharpCY - fNewNear,
+                                       fSharpTopX2, fCurY + fSharpCY - fNewNear,
+                                       x + cx, fCurY + fSharpCY, x, fCurY + fSharpCY,
+                                       csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iDarkRGB | iAlpha, csKBSharp.iDarkRGB | iAlpha );
+                m_pRenderer->DrawSkew( fSharpTopX1, fCurY - fNewNear,
+                                       fSharpTopX1, fCurY + fSharpCY - fNewNear,
+                                       x, fCurY + fSharpCY, x, fCurY,
+                                       csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iDarkRGB | iAlpha, csKBSharp.iDarkRGB | iAlpha );
+                m_pRenderer->DrawSkew( fSharpTopX2, fCurY + fSharpCY - fNewNear,
+                                       fSharpTopX2, fCurY - fNewNear,
+                                       x + cx, fCurY, x + cx, fCurY + fSharpCY,
+                                       csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iDarkRGB | iAlpha, csKBSharp.iDarkRGB | iAlpha );
+                m_pRenderer->DrawRect( fSharpTopX1, fCurY - fNewNear, fSharpTopX2 - fSharpTopX1, fSharpCY, csKBSharp.iDarkRGB | iAlpha );
+                m_pRenderer->DrawSkew( fSharpTopX1, fCurY - fNewNear,
+                                       fSharpTopX2, fCurY - fNewNear,
+                                       fSharpTopX2, fCurY - fNewNear + fSharpCY * 0.35f,
+                                       fSharpTopX1, fCurY - fNewNear + fSharpCY * 0.25f,
+                                       csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iPrimaryRGB | iAlpha );
+                m_pRenderer->DrawSkew( fSharpTopX1, fCurY - fNewNear + fSharpCY * 0.25f,
+                                       fSharpTopX2, fCurY - fNewNear + fSharpCY * 0.35f,
+                                       fSharpTopX2, fCurY - fNewNear + fSharpCY * 0.75f,
+                                       fSharpTopX1, fCurY - fNewNear + fSharpCY * 0.65f,
+                                       csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iDarkRGB | iAlpha, csKBSharp.iDarkRGB | iAlpha );
 ```

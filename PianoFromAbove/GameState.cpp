@@ -296,10 +296,11 @@ GameState::GameError SplashScreen::Logic()
     {
         MIDIChannelEvent *pEvent = m_vEvents[m_iStartPos];
         if (pEvent->GetChannelEventType() != MIDIChannelEvent::NoteOn) {
-            m_OutDevice.PlayEvent(pEvent->GetEventCode(), pEvent->GetParam1(), pEvent->GetParam2());
+            // Introduction song music
+            //m_OutDevice.PlayEvent(pEvent->GetEventCode(), pEvent->GetParam1(), pEvent->GetParam2());
         }
         else if (!m_bMute && !m_vTrackSettings[pEvent->GetTrack()].aChannels[pEvent->GetChannel()].bMuted) {
-            m_OutDevice.PlayEvent(pEvent->GetEventCode(), pEvent->GetParam1(), static_cast<int>(pEvent->GetParam2() * dVolumeCorrect + 0.5));
+            //m_OutDevice.PlayEvent(pEvent->GetEventCode(), pEvent->GetParam1(), static_cast<int>(pEvent->GetParam2() * dVolumeCorrect + 0.5));
         }
          UpdateState( m_iStartPos );
         m_iStartPos++;
@@ -1173,12 +1174,15 @@ GameState::GameError MainScreen::Logic( void )
         while ( m_iStartPos < iEventCount && m_vEvents[m_iStartPos]->GetAbsMicroSec() <= m_llStartTime )
         {
             MIDIChannelEvent *pEvent = m_vEvents[m_iStartPos];
-            if ( pEvent->GetChannelEventType() != MIDIChannelEvent::NoteOn )
-                m_OutDevice.PlayEvent( pEvent->GetEventCode(), pEvent->GetParam1(), pEvent->GetParam2() );
-            else if ( !m_bMute && !m_vTrackSettings[pEvent->GetTrack()].aChannels[pEvent->GetChannel()].bMuted &&
-                      ( m_eGameMode != Learn || m_iLearnOrdinal >= 0 ) )
-                m_OutDevice.PlayEvent( pEvent->GetEventCode(), pEvent->GetParam1(),
-                                       static_cast< int >( pEvent->GetParam2() * dVolumeCorrect + 0.5 ) );
+            if (pEvent->GetChannelEventType() != MIDIChannelEvent::NoteOn)
+            {
+                //Song music notes playback sound
+                //m_OutDevice.PlayEvent(pEvent->GetEventCode(), pEvent->GetParam1(), pEvent->GetParam2());
+            }   
+            else if (!m_bMute && !m_vTrackSettings[pEvent->GetTrack()].aChannels[pEvent->GetChannel()].bMuted && (m_eGameMode != Learn || m_iLearnOrdinal >= 0)) 
+            {
+                //m_OutDevice.PlayEvent(pEvent->GetEventCode(), pEvent->GetParam1(), static_cast<int>(pEvent->GetParam2() * dVolumeCorrect + 0.5));
+            }
             UpdateState( m_iStartPos );
             m_iStartPos++;
         }

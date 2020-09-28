@@ -176,3 +176,31 @@ const bool bBadLearn = ( m_eGameMode == Learn && m_iLearnOrdinal >= 0 && ( iTrac
 ```
 PlayEvent( unsigned char bStatus, unsigned char bParam1, unsigned char bParam2 = 0 );
 ```
+* MIDI Code in Midi.cpp
+```
+bool MIDIOutDevice::PlayEvent( unsigned char cStatus, unsigned char cParam1, unsigned char cParam2 )
+{
+    if ( !m_bIsOpen ) return false;
+    return midiOutShortMsg( m_hMIDIOut, ( cParam2 << 16 ) + ( cParam1 << 8 ) + cStatus ) == MMSYSERR_NOERROR;
+}
+```
+* What is midiOutShortMsg? https://docs.microsoft.com/en-us/windows/win32/api/mmeapi/nf-mmeapi-midioutshortmsg
+* I am guessing that bParam1 and bParam2 are the notes?
+* << is a bitwise shift operator https://stackoverflow.com/questions/10983078/c-what-does-ab-mean
+* What does this mean?
+```
+( cParam2 << 16 ) + ( cParam1 << 8 ) + cStatus
+```
+* Commenting this code out only stops the intro music song
+```
+        MIDIChannelEvent *pEvent = m_vEvents[m_iStartPos];
+        if (pEvent->GetChannelEventType() != MIDIChannelEvent::NoteOn) {
+            m_OutDevice.PlayEvent(pEvent->GetEventCode(), pEvent->GetParam1(), pEvent->GetParam2());
+        }
+        else if (!m_bMute && !m_vTrackSettings[pEvent->GetTrack()].aChannels[pEvent->GetChannel()].bMuted) {
+            m_OutDevice.PlayEvent(pEvent->GetEventCode(), pEvent->GetParam1(), static_cast<int>(pEvent->GetParam2() * dVolumeCorrect + 0.5));
+        }
+         UpdateState( m_iStartPos );
+        m_iStartPos++;
+```
+

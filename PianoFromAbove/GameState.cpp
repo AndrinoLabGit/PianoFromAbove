@@ -1361,8 +1361,28 @@ void MainScreen::ProcessInput()
 
     int iMilliSecs;
     unsigned char cStatus, cParam1, cParam2;
+ 
+    /////////////////////////////////////////////////////////////////
+    // New code 
+    const MIDI::MIDIInfo& mInfo = m_MIDI.GetInfo();
+        
+    double dMaxCorrect = (mInfo.iMaxVolume > 0 ? 127.0 / mInfo.iMaxVolume : 1.0);
+    double dVolumeCorrect = (mInfo.iVolumeSum > 0 ? (m_dVolume * 127.0 * mInfo.iNoteCount) / mInfo.iVolumeSum : 1.0);
+    dVolumeCorrect = min(dVolumeCorrect, dMaxCorrect);
+    // End new code
+    /////////////////////////////////////////////////////////////////
+
+    
     while ( m_InDevice.GetMIDIMessage( cStatus, cParam1, cParam2, iMilliSecs ) )
     {
+        /////////////////////////////////////////////////////////////////
+        // New code 
+        // code to play music from midi notes
+        // m_OutDevice.PlayEvent( pEvent->GetEventCode(), pEvent->GetParam1(), pEvent->GetParam2() );
+        // is cStatus the event code?
+        // cStatus &= 0xF0;
+        m_OutDevice.PlayEventAcrossChannels(cStatus, cParam1, static_cast<int>(cParam2 * dVolumeCorrect + 0.5));
+        //////////////////////////////////////////////////////////////////
         MIDIChannelEvent::ChannelEventType eEventType = static_cast< MIDIChannelEvent::ChannelEventType >( cStatus >> 4 );
         if ( eEventType == MIDIChannelEvent::NoteOff || ( eEventType == MIDIChannelEvent::NoteOn && cParam2 == 0 ) )
             m_pInputState[cParam1] = -1;

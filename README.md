@@ -169,3 +169,10 @@ const bool bBadLearn = ( m_eGameMode == Learn && m_iLearnOrdinal >= 0 && ( iTrac
                                        fSharpTopX1, fCurY - fNewNear + fSharpCY * 0.65f,
                                        csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iPrimaryRGB | iAlpha, csKBSharp.iDarkRGB | iAlpha, csKBSharp.iDarkRGB | iAlpha );
 ```
+9/27/20
+* More attempts at figuring out C++
+* Code uses MIDIOutDevice m_OutDevice to play audio
+* MIDIOutDevice found in midi.h.  How does PlayEvent work?
+```
+PlayEvent( unsigned char bStatus, unsigned char bParam1, unsigned char bParam2 = 0 );
+```

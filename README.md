@@ -203,4 +203,15 @@ bool MIDIOutDevice::PlayEvent( unsigned char cStatus, unsigned char cParam1, uns
          UpdateState( m_iStartPos );
         m_iStartPos++;
 ```
+* I missed this code:
+```
+void MainScreen::ProcessInput()
+{
+    static const ControlsSettings &cControls = Config::GetConfig().GetControlsSettings();
+    static PlaybackSettings &cPlayback = Config::GetConfig().GetPlaybackSettings();
+
+    int iMilliSecs;
+    unsigned char cStatus, cParam1, cParam2;
+```
+* Can I juse use the PlayEvent here to play a sound??
 
